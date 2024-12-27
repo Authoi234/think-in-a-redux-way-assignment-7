@@ -21,7 +21,7 @@ const AddFormPage = () => {
     };
 
     useEffect(() => {
-        const { id, title, salary, deadline, type } = editing || {};
+        const { title, salary, deadline, type } = editing || {};
         if (editing?.id) {
             setEditMode(true);
             setTitle(title);
