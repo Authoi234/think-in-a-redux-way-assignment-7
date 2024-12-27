@@ -12,9 +12,7 @@ const filterSlice = createSlice(
         initialState,
         reducers: {
             changeSort: (state, action) => {
-                console.log('change sort called')
                 state.sort = action.payload;
-                console.log('change sort done')
             },
             changeSearch: (state, action) => {
                 state.search = action.payload;

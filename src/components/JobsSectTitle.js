@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { changeSort } from '../features/filter/filterSlice';
+import { changeSearch, changeSort } from '../features/filter/filterSlice';
 
 const JobsSectTitle = () => {
     const dispatch = useDispatch();
@@ -11,7 +11,7 @@ const JobsSectTitle = () => {
             <div className="flex gap-4">
                 <div className="search-field group flex-1">
                     <i className="fa-solid fa-magnifying-glass search-icon group-focus-within:text-blue-500"></i>
-                    <input type="text" placeholder="Search Job" className="search-input" id="lws-searchJob" />
+                    <input type="text" placeholder="Search Job" onChange={(e) => dispatch(changeSearch(e.target.value))} className="search-input" id="lws-searchJob" />
                 </div>
                 <select id="lws-sort" onChange={e => dispatch(changeSort(e.target.value))} name="sort" autoComplete="sort" className="flex-1">
                     <option value="default">Default</option>

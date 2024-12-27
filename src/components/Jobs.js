@@ -6,7 +6,7 @@ import { editActive, fetchJobs } from '../features/job/jobSlice';
 const Jobs = () => {
     const dispatch = useDispatch();
     const { isLoading, error, isError, jobs } = useSelector(state => state.job);
-    const { filter, sort } = useSelector(state => state.filter);
+    const { filter, sort, search } = useSelector(state => state.filter);
 
     useEffect(() => {
         dispatch(fetchJobs())
@@ -23,13 +23,15 @@ const Jobs = () => {
 
     else if (sort === "lowToHigh") sortedJobs = [...filteredJobs]?.sort((a, b) => parseFloat(a.salary) - parseFloat(b.salary));
 
+    const ultimateJobs = search === "" ? sortedJobs : sortedJobs?.filter(job => job.title.toLowerCase().includes(search.toLowerCase()));
+
     let content;
 
     if (isLoading) content = <div className="loader"></div>
 
     if (!isLoading && isError) content = <p className='error'>There was an error occured: {error}</p>
 
-    if (!isLoading && !isError && jobs.length > 0) content = sortedJobs?.map(job => <Job key={job.id} job={job}></Job>);
+    if (!isLoading && !isError && jobs.length > 0) content = ultimateJobs?.map(job => <Job key={job.id} job={job}></Job>);
 
     if (!isLoading && !isError && jobs.length === 0) content = <p>No Job Found</p>
 
